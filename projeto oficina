@@ -1,0 +1,93 @@
+CREATE DATABASE Oficina;
+
+USE Oficina;
+
+CREATE TABLE Clientes(
+	IdClientes INT auto_increment PRIMARY KEY,
+    	IdVeiculo INT,
+    	CONSTRAINT fk_veiculo FOREIGN KEY (idVeiculo) REFERENCES Veiculo(idVeiculo));
+
+
+CREATE TABLE PessoaFisica(
+	IdPessoaFisica INT auto_increment PRIMARY KEY,
+    	Nome VARCHAR(45) NOT NULL,
+    	CPF CHAR(11) NOT NULL,
+    	Endereço VARCHAR(45),
+    	Contato CHAR(11));
+
+ALTER TABLE PessoaFisica ADD CONSTRAINT unique_cpf_PessoaFisica UNIQUE (CPF);
+
+ALTER TABLE PessoaFisica ADD CONSTRAINT fk_idClientes_pf FOREIGN KEY (idPessoaFisica) REFERENCES Clientes(idClientes),
+ADD CONSTRAINT fk_clinte_pf FOREIGN KEY (idClientePf) REFERENCES Clientes(idClientes),
+ADD CONSTRAINT fk_veiculo_pf FOREIGN KEY (idPessoaFisica) REFERENCES Veiculo(idVeiculo);
+
+
+
+CREATE TABLE PessoaJuridica(
+	IdPessoaJuridica INT auto_increment PRIMARY KEY,
+    	RazaoSocial VARCHAR(45) NOT NULL,
+    	CNPJ CHAR(15) NOT NULL,
+   	Endereço VARCHAR(45),
+   	Contato CHAR(11),
+    	CONSTRAINT unique_cnpj_PessoaJuridica UNIQUE (CNPJ));
+
+ALTER TABLE PessoaJuridica ADD CONSTRAINT fk_clientes_pj FOREIGN KEY (idPessoaJuridica) REFERENCES Clientes(idClientes),
+ADD CONSTRAINT fk_veiculo_pj FOREIGN KEY (idPessoaJuridica) REFERENCES Veiculo(idVeiculo);
+
+
+
+CREATE TABLE Veiculo(
+	IdVeiculo INT auto_increment PRIMARY KEY,
+    	IdRevisão INT,
+    	Placa CHAR(7) NOT NULL,
+    	CONSTRAINT placa_idVeiculo UNIQUE (idVeiculo, Placa));
+
+ALTER TABLE Veiculo ADD CONSTRAINT fk_eqp_mecanicos FOREIGN KEY (idVeiculo) REFERENCES EqpMecanico(idEqpMecanico),
+ADD CONSTRAINT fk_conserto FOREIGN KEY (idVeiculo) REFERENCES Conserto(idConserto),
+ADD CONSTRAINT fk_revisao FOREIGN KEY (idRevisão) REFERENCES Revisao(idRevisão);
+
+
+
+CREATE TABLE Reparo(
+	IdReparo INT auto_increment PRIMARY KEY,
+    	Descrição VARCHAR(45) NOT NULL);
+
+
+CREATE TABLE Mecanico(
+	IdMecanico INT auto_increment PRIMARY KEY,
+    	Nome VARCHAR(45) NOT NULL,
+    	Endereço VARCHAR(45) NOT NULL,
+    	Especialidade VARCHAR(45) NOT NULL);
+
+
+CREATE TABLE OdServiço(
+	IdOdServiço INT auto_increment PRIMARY KEY,
+    	DataEmissão DATE,
+    	ValorServiço FLOAT NOT NULL,
+    	ValorPeça FLOAT NOT NULL,
+    	ValorTotal FLOAT NOT NULL,
+    	Status ENUM('AGUARDANDO', 'EM ANDAMENTO', 'CONCLUIDO', 'CANCELADO'),
+    	DataConclusão DATE);
+
+CREATE TABLE Peças(
+	IdPeças INT auto_increment PRIMARY KEY,
+   	Descrição VARCHAR(45),
+    	Valor FLOAT NOT NULL);
+
+
+CREATE TABLE OsPecas(
+	IdOsPecas INT auto_increment PRIMARY KEY,
+	CONSTRAINT fk_pecas FOREIGN KEY (IdOsPecas) REFERENCES Pecas(IdPecas),
+   	CONSTRAINT fk_os_pecas FOREIGN KEY (IdOsPecas) REFERENCES OdServiço(IdOdServiço));
+
+
+CREATE TABLE Serviços(
+	IdServiços INT auto_increment PRIMARY KEY,
+    	Descrição VARCHAR(45),
+  	Valor FLOAT NOT NULL);
+
+
+CREATE TABLE OdServiço(
+	IdOdServiço INT auto_increment PRIMARY KEY,
+    	CONSTRAINT fk_serviços FOREIGN KEY (IdOdServiço) REFERENCES Serviços(IdServiços),
+    	CONSTRAINT fk_os_serviços FOREIGN KEY (IdOdServiço) REFERENCES OdServiço(IdOdServiço));

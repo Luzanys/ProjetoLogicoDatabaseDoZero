@@ -1,0 +1,53 @@
+USE Oficina;
+
+INSERT INTO PessoaFisica VALUES (1, 'Joao', 12345678910, 'Treze de maio, 333', '11137564556'),
+								                (2, 'Cristiano', 08975386541, 'Paraíso, 17', '11997665745'),
+                                (3, 'Carlos', 78531297453, 'Rua Ota, 99', '11091184726'),
+                                (4, 'Mauro', 89674435241, 'Saudade, 13', '11997674632'),
+                                (5, 'Carol', 90877865576, 'Paixão, 7', '11976556477');
+                               
+
+INSERT INTO Veiculo VALUES 	(1, 1, 'NBH4567'),
+							              (2, 2, 'JHJ5563'),
+                            (3, 3, 'ASK8944'),
+                            (4, 4, 'EQW6214'),
+                            (5, 5, 'ADE2144');
+                            
+
+
+INSERT INTO Reparo VALUES   (1, 'Travando'),
+							              (2, 'Trocar'),
+                            (3, 'Não liga'),
+                            (4, 'Barulho'),
+                            (5, 'Retrovisor');
+                           
+                            
+
+INSERT INTO Mecanico VALUES	(1, 'Jhon', 'Rua de Trás', 'Borracharia'),
+							              (2, 'Alemão', 'Esquina com a primeira', 'Eletricista'),
+                            (3, 'Zézinho', 'Virtude, 555', 'Qualquer tipo de reparo'),
+                            (4, 'Mano', 'Rua dos espertos, 1', 'Funilaria'),
+                            (5, 'Ricardo', 'Rua plenitude, 54', 'Geral');
+                            
+
+
+INSERT INTO OdServiço VALUES 	(1, '2022/09/08', '134.50', '15.00', '149.50', 'AGUARDANDO', NULL),
+								              (2, '2022/09/06', '198.90', '80.90', '207.88', 'CONCLUIDO', '2022/09/09'),
+								              (3, '2022/09/03', '930.99', '520.10', '930.99', 'CONCLUIDO', '2022/09/10'),
+								              (4, '2022/08/18', '245.70', '110.90', '356.60', 'EM ANDAMENTO', NULL),
+								              (5, '2022/08/30', '480.87', '10.15', '491.02', 'CANCELADO', NULL);
+								              
+
+INSERT INTO Peças VALUES 	(1, 'Volante', '15.00'),
+							            (2, 'Banco do passageiro', '200.90'),
+							            (3, 'Cambio', '520.10'),
+							            (4, 'Caixa eletrica', '110.90'),
+							            (5, 'Troca De Retrovisor', '10.15');
+							      
+                                
+INSERT INTO Serviços VALUES 	(1, 'Problemas Eletricos', '134.50'),
+								              (2, 'Trocar por novo', '198.90'),
+								              (3, 'Problemas Eletricos', '930.99'),
+								              (4, 'Peça proxima a caixa de direção danificada', '245.70'),
+								              (5, 'Quebrado', '200.87');
+								        
